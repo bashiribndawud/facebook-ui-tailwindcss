@@ -1,20 +1,30 @@
-import React, {useState, useEffect} from 'react'
-import Logo from "../assets/facebook.png"
-import Profile from "../assets/Bashir.JPG"
-import Index from './Create/Index';
-import Search from './Search';
-import Chat from "./Chat/Index"
+import React, { useState, useEffect } from "react";
+import Logo from "../assets/facebook.png";
+import Profile from "../assets/Bashir.JPG";
+import Index from "./Create/Index";
+import Search from "./Search";
+import Chat from "./Chat/Index";
+import NotificationIndex from "./Notification/Index";
+
 const Header = ({ setCreate, create }) => {
   const [showSearch, setShowSearch] = useState(false);
-  const [showChat, setShowChat] = useState(false)
+  const [showChat, setShowChat] = useState(false);
+  const [showNotification, setShowNotification] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   function handleCreate() {
-    setCreate(!create)
-    setShowChat(false)
+    setCreate(!create);
+    setShowChat(false);
+    setShowNotification(false)
   }
   function handleShowChat() {
-    setShowChat(!showChat)
-    setCreate(false)
+    setShowChat(!showChat);
+    setCreate(false);
+    setShowNotification(false);
+  }
+  function handleShowNotification() {
+    setCreate(false);
+    setShowChat(false);
+    setShowNotification(!showNotification)
   }
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -113,7 +123,7 @@ const Header = ({ setCreate, create }) => {
               )}
             </div>
             <div
-              className="bg-gray-100 p-3 rounded-full hover:bg-blue-50 hover:cursor-pointer"
+              className="bg-gray-100 p-3 rounded-full active:bg-blue-100 hover:cursor-pointer"
               onClick={handleShowChat}
             >
               <svg
@@ -129,7 +139,10 @@ const Header = ({ setCreate, create }) => {
                 />
               </svg>
             </div>
-            <div className="bg-gray-100 p-3 rounded-full">
+            <div
+              className="bg-gray-100 p-3 rounded-full active:bg-blue-100 hover:cursor-pointer"
+              onClick={handleShowNotification}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -271,9 +284,9 @@ const Header = ({ setCreate, create }) => {
       </nav>
       {showSearch && <Search setShowSearch={setShowSearch} />}
       {showChat && <Chat />}
+      {showNotification && <NotificationIndex />}
     </>
   );
 };
 
-export default Header
-
+export default Header;
