@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import NewMessage from './components/NewMessage';
 import Index from './components/Create/Index';
-
+import Sidebar from "./components/Sidebar"
 
 function App() {
   const [showMessage, setShowMessage] = useState(false)
@@ -21,9 +21,9 @@ function App() {
     <div className="relative">
       <Header setCreate={setCreate} create={create} />
       <div className="pt-16 w-screen h-screen bg-gray-100 flex flex-row relative">
-        <div className="w-[22%] ">Sidebar</div>
-        <div className="w-[55%] ">Main</div>
-        <div className="w-[23%] ">widgets</div>
+        <div className="w-[22%] hidden xl:flex"><Sidebar /></div>
+        <div className="w-[55%]  flex-1 ">Main</div>
+        <div className="w-[23%] hidden lg:flex">widgets</div>
       </div>
       {showOptions && (
         <div

@@ -5,26 +5,37 @@ import Index from "./Create/Index";
 import Search from "./Search";
 import Chat from "./Chat/Index";
 import NotificationIndex from "./Notification/Index";
+import ProfileIndex from "./Account/Index"
 
 const Header = ({ setCreate, create }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [showChat, setShowChat] = useState(false);
-  const [showNotification, setShowNotification] = useState(false)
+  const [showNotification, setShowNotification] = useState(false);
+  const [showProfile, setShowProfile] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   function handleCreate() {
     setCreate(!create);
     setShowChat(false);
     setShowNotification(false)
+    setShowProfile(false);
   }
   function handleShowChat() {
     setShowChat(!showChat);
     setCreate(false);
     setShowNotification(false);
+    setShowProfile(false);
   }
   function handleShowNotification() {
     setCreate(false);
     setShowChat(false);
     setShowNotification(!showNotification)
+    setShowProfile(false);
+  }
+  function handleShowProfile() {
+    setShowProfile(!showProfile)
+    setShowChat(false);
+    setShowNotification(false);
+    setCreate(false);
   }
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -63,7 +74,7 @@ const Header = ({ setCreate, create }) => {
                 </svg>
               </button>
             ) : (
-              <div className="hidden xl:flex items-center bg-gray-100 rounded-full ml-2 px-4 py-2">
+              <div className="hidden xl:flex items-center bg-gray-100 rounded-full ml-2 px-4 py-2 hover:cursor-pointer" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -112,7 +123,7 @@ const Header = ({ setCreate, create }) => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  class="w-6 h-6 hover:cursor-pointer"
                 >
                   <path
                     stroke-linecap="round"
@@ -156,9 +167,13 @@ const Header = ({ setCreate, create }) => {
                 />
               </svg>
             </div>
-            <div class="relative">
-              <img class="w-12 h-12 rounded-full" src={Profile} alt=""></img>
-              <span class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            <div class="relative inline-block" onClick={handleShowProfile}>
+              <img
+                class="block w-12 h-12 rounded-full hover:cursor-pointer hover:bg-black"
+                src={Profile}
+                alt=""
+              ></img>
+              <div class="absolute inset-0 rounded-full bg-black bg-opacity-10 hover:bg-opacity-20 hover:cursor-pointer transition-opacity"></div>
             </div>
           </div>
           <div
@@ -224,7 +239,7 @@ const Header = ({ setCreate, create }) => {
               </li>
               <li
                 className="lg:px-[40px] py-[10px] md:px-[20px] hover:bg-gray-100 rounded hover:cursor-pointer"
-                data-tooltip-target="tooltip-bottom"
+                data-tooltip-target="groups"
                 data-tooltip-placement="bottom"
               >
                 <svg
@@ -242,7 +257,7 @@ const Header = ({ setCreate, create }) => {
                   />
                 </svg>
                 <div
-                  id="tooltip-bottom"
+                  id="groups"
                   role="tooltip"
                   class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
                 >
@@ -285,6 +300,7 @@ const Header = ({ setCreate, create }) => {
       {showSearch && <Search setShowSearch={setShowSearch} />}
       {showChat && <Chat />}
       {showNotification && <NotificationIndex />}
+      {showProfile && <ProfileIndex />}
     </>
   );
 };
