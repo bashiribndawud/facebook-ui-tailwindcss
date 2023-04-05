@@ -18,7 +18,7 @@ import Messenger from "../assets/messenger.png"
 import Star from "../assets/star.png"
 const Sidebar = ({ Icon, title }) => {
   return (
-    <div className="flex flex-col flex-1 overflow-auto py-2 pt-4 space-y-2 overflow-x-hidden">
+    <div className="flex flex-col flex-1 overflow-auto py-2 pt-4 space-y-1 overflow-x-hidden">
       <div className="flex flex-row space-x-1 items-center p-1 ml-2 hover:bg-gray-200 hover:cursor-pointer rounded-l-lg">
         {" "}
         <img
